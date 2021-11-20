@@ -57,7 +57,7 @@ int list_ins_next(List *list, Node *node, const void *data) {
 }
 
 int list_rem_next(List *list, Node *node, void **data) {
-    Node *node;
+    Node *old_node;
 
     if (list_size(list) == 0) {
         return -1;
@@ -65,6 +65,30 @@ int list_rem_next(List *list, Node *node, void **data) {
 
     // Remove element from list
     if (node == NULL) {
+        // Remove from head
+        *data = list->head->data;
+        old_node = list->head;
+        list->head = list->head->next;
 
+        if (list_size(list) == 1) {
+            list->tail = NULL;
+        }
+    } else {
+        // Remove specified element
+        if (node->next == NULL) {
+            return -1;
+        }
+
+        *data = node->next->data;
+        old_node = node->next;
+        node->next = node->next->next;
+
+        if (node->next == NULL) {
+            list->tail = node;
+        }
     }
+
+    free(old_node);
+    list->size--;
+    return 0;
 }

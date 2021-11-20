@@ -32,12 +32,12 @@ int list_rem_next(List *list, Node *node, void **data);
 
 #define list_tail(list) ((list)->tail)
 
-#define list_is_head(list, element) ((element) == (list)->head ? 1 : 0)
+#define list_is_head(list, node) ((node) == (list)->head ? 1 : 0)
 
-#define list_is_tail(element) ((element)->next == NULL ? 1 : 0)
+#define list_is_tail(node) ((node)->next == NULL ? 1 : 0)
 
-#define list_data(element) ((element)->data)
+#define list_data(node) ((node)->data)
 
-#define list_next(element) ((element)->next)
+#define list_next(node) ((node)->next)
 
 #endif
